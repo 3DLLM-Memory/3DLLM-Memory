@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3DLLM-Mem: Long-Term Spatial-Temporal Memory for Embodied 3D Large Language Model</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-06E12DG85Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-06E12DG85Q');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/icon.ico"  type="image/x-icon">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <style>
+    /* Optionally, ensure there is no clipping in publication-video containers */
+    .publication-video {
+      overflow: visible; /* or overflow: auto */
+    }
+    
+    /* Enforce video scaling rules */
+    .publication-video video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <!-- <h1 class="title is-1 publication-title">SnapMem: Snapshot-based 3D Scene Memory for Embodied Exploration and Reasoning</h1> -->
+          <!-- <h1 class="title is-1 publication-title">
+            <a style="color:#6e44ff;">3</a><a style="color:#b892ff;">D</a>-<a style="color:#ffc2e2;">M</a><a style="color:#ff90b3;">e</a><a style="color:#ef7a85;">m</a>            
+          </h1> -->
+          <h2 class="subtitle is-3 publication-subtitle">
+            3DLLM-Mem      
+          </h2>
+          <h2 class="subtitle publication-subtitle" style="font-size: 1.7rem;color:#000000; margin-top: -7px;">
+            Under Review   
+          </h2>
+          <div class="is-size-5 publication-authors" style="margin-top: -7px;">
+            <span class="author-block">
+              Anonymous Authors 
+            <!-- <span class="author-block">
+              <a href="https://hanyangclarence.github.io/">Han Yang</a>*<sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/jiachen-zhou5/">Jiachen Zhou</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://peihaochen.github.io/">Peihao Chen</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://icefoxzhx.github.io/">Hongxin Zhang</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://yilundu.github.io/">Yilun Du</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://people.csail.mit.edu/ganchuang/">Chuang Gan</a><sup>1</sup>
+            </span> -->
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Affiliation</span>
+            <!-- <span class="author-block"><sup>2</sup>CUHK,</span>
+            <span class="author-block"><sup>3</sup>Columbia University,</span>
+            <span class="author-block"><sup>4</sup>MIT</span> -->
+          </div>
+
+          <!-- <div class="is-size-5 publication-authors">
+            <span class="author-block">(* indicates equal contribution)</span>
+          </div> -->
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
+        free-viewpoint
+        portraits.
+      </h2>
+    </div>
+  </div>
+</section> -->
+
+
+<!-- <section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/steve.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/chair-tp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/shiba.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/fullbody.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/blueshirt.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-mask">
+          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/mask.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-coffee">
+          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/coffee.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/toby2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">More Qualitative Results</h2>
+        <h2 class="title is-size-5"><strong>Task:</strong> Prepare a DIY First-Aid Rest Station for a Sick Child</h2>
+
+        <div class="content has-text-justified">
+          <!-- <p>
+            Our 3DLLM-Mem first explores the rooms and finds a suitable place (which has chairs and medicine on the table) for setup. It then 
+            recalls its memory and collects the band aid, a water bottle, and more medicines in order. Finally, it brings a teddy bear for the kid.
+          </p> -->
+          <p> 
+            Our 3DLLM-Mem agent begins by exploring the environment to locate an appropriate setup area—identified by the presence of chairs and medicine on the table. Leveraging its memory, the agent sequentially collect essential items: a band-aid, a water bottle, additional medications, and, a teddy bear for the child.
+          </p>
+        </div>
+
+        <!-- Example 1 -->
+        <div class="columns is-centered has-text-centered" style="margin-bottom: 20mm; margin-top: 3mm;">
+          <!-- Agent POV -->
+          <div class="column">
+            <div class="publication-video">
+              <video controls autoplay muted style="display: block; width: 100%; height: 300px; object-fit: contain;">
+    
+       <!-- style="display: block; width: 100%; height: 300px; object-fit: cover;"> -->
+                <source src="static/videos/853_agent_pov.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <p class="has-text-centered is-size-6 mt-2">Agent's First-Person View</p>
+            </div>
+          </div>
+
+          <!-- Watcher POV -->
+          <div class="column">
+            <div class="publication-video">
+              <video controls autoplay muted style="display: block; width: 100%; height: 300px; object-fit: contain;">
+                <source src="static/videos/853_watcher_pov.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <p class="has-text-centered is-size-6 mt-2">Third-Person View</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="title is-size-5"><strong>Task:</strong> Prepare the Most Suitable Gift Box for the Teddy Bear</h2>
+
+        <div class="content has-text-justified">
+          <!-- <p>
+            Our 3DLLM-Mem agent first find the teddy bear, then compare with the gift box in the living room, navigate to the living room to try find another gift box and compare with it, and continue finds another one in the kitchen, after it compare with all, it recall its memory and then decied to use the most suitable one as one in the living room. 
+          </p> -->
+          <p>
+            Our 3DLLM-Mem agent begins by locating the teddy bear. It then evaluates a gift box in the bedroom, navigates to the living room to inspect another, and finally searches the kitchen for a third option. After comparing all available gift boxes, the agent recalls its observations and selects the most suitable one—the box found in the living room.
+          </p>
+        </div>
+          
+        <!-- Example 2 -->
+        <div class="columns is-centered has-text-centered" style="margin-bottom: 20mm; margin-top: 3mm;">
+          <!-- Agent POV -->
+          <div class="column">
+            <div class="publication-video">
+              <!-- <video controls autoplay muted style="display: block; width: 100%; height: auto;"> -->
+              <video controls autoplay muted style="display: block; width: 100%; height: 300px;  object-fit: contain;">
+              
+                <source src="static/videos/agent_obs_part1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <p class="has-text-centered is-size-6 mt-2">Agent's First-Person View</p>
+            </div>
+          </div>
+
+          <!-- Watcher POV -->
+          <div class="column">
+            <div class="publication-video">
+              <video controls autoplay muted style="display: block; width: 100%; height: 300px; object-fit: contain;">
+                <source src="static/videos/watcher_obs_part1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <p class="has-text-centered is-size-6 mt-2">Third-Person View</p>
+            </div>
+          </div>
+        </div>
+        
+        <h2 class="title is-size-5"><strong>Task:</strong> Prepare a Romantic Breakfast of Avocado Toast for a Couple</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            Our 3DLLM-Mem agent begins by placing a candle to set the mood, followed by arranging two plates. The agent then locates a wine bottle on the kitchen counter and places it on the table. Next, it prepares each serving: one slice of bread and an avocado for each plate. Finally, it completes the setup by placing a fork beside each plate, creating a thoughtful and well-organized breakfast setting for two.
+          </p>
+        </div>
+          
+        <!-- Example 3 -->
+        <div class="columns is-centered has-text-centered" style="margin-bottom: 20mm; margin-top: 3mm;">
+          <!-- Agent POV -->
+          <div class="column">
+            <div class="publication-video">
+              <!-- <video controls autoplay muted style="display: block; width: 100%; height: auto;"> -->
+              <video controls autoplay muted style="display: block; width: 100%; height: 300px;  object-fit: contain;">
+              
+                <source src="static/videos/327_agent.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <p class="has-text-centered is-size-6 mt-2">Agent's First-Person View</p>
+            </div>
+          </div>
+
+          <!-- Watcher POV -->
+          <div class="column">
+            <div class="publication-video">
+              <video controls autoplay muted style="display: block; width: 100%; height: 300px; object-fit: contain;">
+                <source src="static/videos/327_watcher.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <p class="has-text-centered is-size-6 mt-2">Third-Person View</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="title is-size-5"><strong>Task:</strong> Prepare a Cozy Reading Nook in the Living Room with Two Books and a Teacup</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            Our 3DLLM-Mem agent begins by freely exploring the environment, forming an initial memory. After receiving the task instruction, it recalls a book stored in a bedroom cabinet, navigates there, and retrieves it. The agent returns to the living room and places it book on the table. Since no other books come to mind, it resumes exploration and eventually finds a second book on the bed. This book is brought back and stacked atop the first. Finally, recalling a teacup previously seen in the kitchen, the agent retrieves it and places it on the table, completing the cozy reading nook setup.
+          </p>
+        </div>
+          
+        <!-- Example 4 -->
+        <div class="columns is-centered has-text-centered" style="margin-bottom: 20mm; margin-top: 3mm;">
+          <!-- Agent POV -->
+          <div class="column">
+            <div class="publication-video">
+              <!-- <video controls autoplay muted style="display: block; width: 100%; height: auto;"> -->
+              <video controls autoplay muted style="display: block; width: 100%; height: 300px;  object-fit: contain;">
+              
+                <source src="static/videos/506_agent_pov.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <p class="has-text-centered is-size-6 mt-2">Agent's First-Person View</p>
+            </div>
+          </div>
+
+          <!-- Watcher POV -->
+          <div class="column">
+            <div class="publication-video">
+              <video controls autoplay muted style="display: block; width: 100%; height: 300px; object-fit: contain;">
+                <source src="static/videos/506_watcher_follow_agent_2160.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <p class="has-text-centered is-size-6 mt-2">Third-Person View</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="title is-size-5"><strong>Task:</strong> Select the Most Suitable Basket for Collecting All the Clothes
+        </h2>
+
+        <div class="content has-text-justified">
+          <p>
+            Our 3DLLM-Mem agent starts at its initial position and discovers the first basket and then explores the environment while finding each clothing item—leggings, tank top, tights, and turtleneck—hovering over them to evaluate suitability. Afterward, it returns to the location of the first basket, puts it down and picks up the second one, and repeats the comparison process. Concluding that the first basket is the most suitable, the agent returns to it.
+          </p>
+        </div>
+
+           <!-- Example 5 -->
+           <div class="columns is-centered has-text-centered" style="margin-top: 10mm;">
+            <!-- Agent POV -->
+            <div class="column">
+              <div class="publication-video">
+                <!-- <video controls autoplay muted style="display: block; width: 100%; height: auto;"> -->
+                <video controls autoplay muted style="display: block; width: 100%; height: 300px;  object-fit: contain;">
+                
+                  <source src="static/videos/712_agent_pov_new.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <p class="has-text-centered is-size-6 mt-2">Agent's First-Person View</p>
+              </div>
+            </div>
+  
+            <!-- Watcher POV -->
+            <div class="column">
+              <div class="publication-video">
+                <video controls autoplay muted style="display: block; width: 100%; height: 300px; object-fit: contain;">
+                  <source src="static/videos/712_watcher_pov_new.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <p class="has-text-centered is-size-6 mt-2">Third-Person View</p>
+              </div>
+            </div>
+          </div>
+
+      </div> <!-- /column full-width -->
+    </div> <!-- /columns -->
+  </div> <!-- /container -->
+</section>
+
+
+<br>
+
+<section class="section" id="BibTeX" style="margin-top: 30mm;">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{
+      title={3DLLM-Mem: Long-Term Spatial-Temporal Memory for Embodied 3D Large Language Model}, 
+      author={Anonymous Authors},
+      year={2025},
+}</code></pre>
+  </div>
+
+
+
+<footer class="footer">
+  <div class="container">
+    <!-- <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div> -->
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
